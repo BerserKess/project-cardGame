@@ -7,6 +7,10 @@ import java.util.List;
 public class Deck {
         private List<Card> cartas = new ArrayList<>();
 
+    public List<Card> getCartas() {
+        return cartas;
+    }
+
 
     // METODOS
 
