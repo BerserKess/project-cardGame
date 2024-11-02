@@ -11,9 +11,11 @@ public class Game {
         MonsterCard carta1 = new MonsterCard(
                 "Mago Negro", "Um mago que usa magia negra",
                 2500, 2100, "Elfo", true, Element.Trevas);
+        carta1.setModo(Mode.Defesa);
         MonsterCard carta2 = new MonsterCard(
                 "Guerreiro Guardião Celta", "Guerreiro Feroz das florestas",
                 1400, 1200, "Elfo", true, Element.Terra);
+        carta2.setModo(Mode.Ataque);
         MonsterCard carta3 = new MonsterCard(
                 "Dragão Branco de Olhos Azuis", "Dragão Branco que vive no alto das montanhas nevadas",
                 3000, 2500, "Dragão", true, Element.Vento);
@@ -25,6 +27,15 @@ public class Game {
 
         Deck jogador2Baralho = new Deck();
         jogador2Baralho.adicionarCartas(carta3);
+
+        // CRIANDO MÃO
+        Hand cartasNaMao = new Hand();
+
+        // exemplo batalha
+
+        Battle batalhar = new Battle();
+        batalhar.golpe(carta2,carta1,jogador1,jogador2);
+
 
 
     }

@@ -1,9 +1,10 @@
 package CardGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    public List<Card> cartas;
+    public List<Card> cartas = new ArrayList<>();
 
     // METODOS
     public void adicionarCarta(Deck baralho){
