@@ -36,5 +36,7 @@ public class Game {
         Battle batalhar = new Battle();
         batalhar.golpe(carta2,carta1,jogador1,jogador2);
 
+
+
     }
 }
