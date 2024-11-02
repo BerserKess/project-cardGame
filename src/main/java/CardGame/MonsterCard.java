@@ -10,10 +10,9 @@ public class MonsterCard extends Card {
 
     // CONSTRUCTOR
 
-    public MonsterCard(String nome, String descricao, Mode modo, int ataque, int defesa, String raca, boolean estaVivo, Element elemento) {
+    public MonsterCard(String nome, String descricao, int ataque, int defesa, String raca, boolean estaVivo, Element elemento) {
         this.nome = nome;
         this.descricao = descricao;
-        this.modo = modo;
         this.ataque = ataque;
         this.defesa = defesa;
         this.raca = raca;
@@ -120,10 +119,5 @@ public class MonsterCard extends Card {
         }
 
     }
-
-    public void atacar(){
-        this.ataque = getAtaque();
-    }
-
 
 }

@@ -1,5 +1,7 @@
 package CardGame;
 
+import java.util.List;
+
 public class Player {
     public String nome;
     public int PontosDeVida;
@@ -31,4 +33,6 @@ public class Player {
     public void setSuaVez(boolean suaVez) {
         this.suaVez = suaVez;
     }
+
+    // METODOS
 }
