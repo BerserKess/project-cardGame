@@ -5,19 +5,45 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-        private List<Card> cartas = new ArrayList<>();
+    private List<Card> cartas;
 
+    // CONSTRUTOR
+    public Deck() {
+        this.cartas = new ArrayList<>();
+    }
+
+    // GETTER
     public List<Card> getCartas() {
         return cartas;
     }
 
     // METODOS
+        // ADICIONAR CARTA AO DECK
+    public void add(Card carta){
+        this.cartas.add(carta);
+    }
 
-        public void criarDeck(Card[] cartas){
-            Collections.addAll(this.cartas,cartas);
+    public static void criarDeck(List<Card> cartas, Deck deck1, Deck deck2){
+        Collections.shuffle(cartas);
+
+        for (int i =0; i < cartas.size(); i++){
+            if (i % 2 == 0){
+                deck1.add(cartas.get(i));
+            }
+            else {
+                deck2.add(cartas.get(i));
+            }
         }
 
-        public void embaralhar(){
+    }
+
+    public void exibirCartas(){
+        for (Card carta : cartas){
+            System.out.println(carta.nome);
+        }
+    }
+
+    public void embaralhar(){
             Collections.shuffle(cartas);
         }
 

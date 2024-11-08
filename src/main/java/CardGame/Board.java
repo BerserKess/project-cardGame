@@ -50,4 +50,10 @@ public class Board {
         }
 
     }
+
+    public void mostrarCartas(List<Card> cartas){
+        for(int i = 0; i < cartas.size(); i++){
+            System.out.println(i + " - " + cartas.get(i).nome);
+        }
+    }
 }

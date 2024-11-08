@@ -63,7 +63,7 @@ public class Player {
 
     public void mostrarCartasNaMao(List<Card> cartas){
        for (int i = 0; i < cartas.size(); i++){
-           System.out.println((i+1) + " - " + cartas.get(i).nome);
+           System.out.println(i + " - " + cartas.get(i).nome);
        }
     }
 
