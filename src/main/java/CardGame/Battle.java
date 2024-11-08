@@ -41,10 +41,10 @@ public class Battle {
                 } else if (dano < 0) {
                     System.out.println(atacante.nome + " não conseguiu superar o ataque de "
                             + defensor.nome + " e foi desttruido. O duelista "
-                            + jogadorAtacante.nome + "sofreu " + dano + " de dano.");
+                            + jogadorAtacante.nome + " sofreu " + dano + " de dano.");
                     atacante.setEstaVivo(false);
                     campoDoAtacante.getSlotDeMonstro().remove(atacante);
-                    jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() - dano);
+                    jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() + dano);
 
                 } else {
                     System.out.println("Os poderes de " + atacante.nome + " e " +

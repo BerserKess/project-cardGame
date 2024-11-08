@@ -1,11 +1,15 @@
 package CardGame;
 
+
+
 public class Game {
     public static void main(String[] args) {
 
         // CRIANDO JOGADORES
         Player jogador1 = new Player("Yugi", 4000, false);
+        jogador1.setSuaVez(true);
         Player jogador2 = new Player("Kaiba", 4000, false);
+        jogador2.setSuaVez(false);
 
         // CRIANDO CARTAS
         MonsterCard magoNegro = new MonsterCard(
@@ -42,27 +46,59 @@ public class Game {
         deckDuelista2.criarDeck(cartasDuelista2);
 
         // mostrar cartas do deck
-        for (Card carta : deckDuelista1.getCartas()){
-            System.out.println(carta.nome);
-        }
+        //for (Card carta : deckDuelista1.getCartas()){
+          //  System.out.println(carta.nome);
+        //}
 
-        jogador1.comprarCarta(deckDuelista1,jogador1);
-        jogador1.comprarCarta(deckDuelista1,jogador1);
+
         jogador1.mostrarCartasNaMao(jogador1.cartasNaMao);
 
-
-        // CRIANDO MÃO
-//        Hand jogador1Mao = new Hand();
-//        Hand jogador2Mao = new Hand();
-//
         // CRIAR CAMPOS
         Board boardDuelista1 = new Board();
         Board boardDuelista2 = new Board();
 //
         // CRIAR BATALHA
-//        Battle batalhar = new Battle();
+        Battle duelo = new Battle();
+
+        // CRIA MÃO DO JOGADOR
 //
+            jogador1.comprarCarta(deckDuelista1,jogador1);
+            jogador1.comprarCarta(deckDuelista1,jogador1);
+            jogador1.comprarCarta(deckDuelista1,jogador1);
+
+
+            jogador2.comprarCarta(deckDuelista2,jogador2);
+            jogador2.comprarCarta(deckDuelista2,jogador2);
+            jogador2.comprarCarta(deckDuelista2,jogador2);
         // SIMULAÇÃO DE TURNOS
+        if (jogador1.isSuaVez()){
+            if (!jogador1.cartasNaMao.isEmpty()){
+                Card cartaJogada = jogador1.removerCartasDaMao(1);
+                boardDuelista1.receberCarta(cartaJogada,jogador1,0);
+                jogador1.setSuaVez(false);
+            }
+                System.out.println("FIM DO TURNO");
+
+        }
+
+        // TURNO 2
+        jogador2.setSuaVez(true);
+        if (jogador2.isSuaVez()) {
+            Card cartaJogada = jogador2.removerCartasDaMao(0);
+            boardDuelista2.receberCarta(cartaJogada,jogador2,0);
+        }
+
+        // BATALHA
+        if (!boardDuelista2.getSlotDeMonstro().isEmpty()){
+        MonsterCard atacante = boardDuelista2.escolherMonstro(0);
+        MonsterCard defensor = boardDuelista1.escolherMonstro(0);
+        duelo.golpe(atacante, defensor, jogador2, jogador1, boardDuelista1, boardDuelista2);
+        }
+
+        System.out.println("Pontos de vida de " + jogador1.nome + ": " + jogador1.getPontosDeVida());
+        System.out.println("Pontos de vida de " + jogador2.nome + ": " + jogador2.getPontosDeVida());
+
+
         // COMPRAR CARTA NO INICIO DO TURNO
 //
 //        // jogador1Mao.adicionarCarta(jogador1Baralho, jogador1);
@@ -101,5 +137,28 @@ public class Game {
 
 
     }
+//    public void duelistaDaVez(Player duelista, Deck deck, Battle duelo, Board campo){
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("O que deseja fazer " + duelista.nome + " ?");
+//        System.out.println("1 - Comprar carta\n");
+//        System.out.println("2 - Duelo\n");
+//        System.out.println("3 - Finalizar Turno\n");
+//        int opcao = scanner.nextInt();
+//
+//        switch (opcao){
+//            case 1:
+//                duelista.comprarCarta(deck,duelista);
+//                break;
+//            case 2:
+//                if (!campo.getSlotDeMonstro().isEmpty()){
+//                    MonsterCard atacante = campo.escolherMonstro(0);
+//                    MonsterCard defensor = campo.escolherMonstro(0);
+//                    duelo.golpe(atacante, defensor, jogador2, jogador1, jogador1Campo, jogador2Campo);
+//                }
+//        }
+//
+//
+//
+//    }
 
 }
