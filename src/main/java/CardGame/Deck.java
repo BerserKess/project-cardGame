@@ -11,12 +11,12 @@ public class Deck {
         return cartas;
     }
 
-
     // METODOS
 
-        public void adicionarCartas(Card carta){
-            this.cartas.add(carta);
+        public void criarDeck(Card[] cartas){
+            Collections.addAll(this.cartas,cartas);
         }
+
         public void embaralhar(){
             Collections.shuffle(cartas);
         }

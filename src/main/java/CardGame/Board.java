@@ -25,12 +25,13 @@ public class Board {
         }
     }
 
-    public void receberCarta(Card carta, Player jogador){
-        if ( carta instanceof MonsterCard) {
+    public void receberCarta(Card carta, Player jogador, int index){
+        if (carta instanceof MonsterCard) {
             if (slotDeMonstro.size() < MAX_DE_CARTAS_NO_CAMPO){
                 slotDeMonstro.add((MonsterCard) carta);
                 System.out.println("Carta colocada no campo pelo duelista "
                         + jogador.nome + " foi: " + carta.nome);
+                jogador.removerCartasDaMao(index);
             }
             else {
                 System.out.println("Não tem mais espaço para colocar cartas");
@@ -41,6 +42,7 @@ public class Board {
                 slotDeMagia.add((MagicCard) carta);
                 System.out.println("Carta colocada no campo pelo duelista "
                         + jogador.nome + " foi: " + carta.nome);
+                jogador.removerCartasDaMao(index);
             }
             else {
                 System.out.println("Não tem mais espaço para colocar cartas");
