@@ -4,28 +4,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    public String nome;
-    public int PontosDeVida;
+    String nome;
+    private int pontosDeVida;
     private boolean suaVez;
-    public List<Card> cartasNaMao = new ArrayList<>();
-
-    //CONSTRUCTOR
+    List<Card> cartasNaMao;
 
     public Player(String nome, int pontosDeVida, boolean suaVez) {
         this.nome = nome;
-        PontosDeVida = pontosDeVida;
+        this.pontosDeVida = pontosDeVida;
         this.suaVez = suaVez;
+        this.cartasNaMao = new ArrayList<>();
     }
 
+    public void comprarCarta(Deck deck, Player jogador) {
+        if (!deck.cartas.isEmpty()) {
+            Card carta = deck.cartas.remove(0); // Remove a carta do deck e adiciona à mão do jogador
+            cartasNaMao.add(carta);
+            System.out.println(jogador.nome + " comprou " + carta.nome);
+        } else {
+            System.out.println("O deck está vazio.");
+        }
+    }
 
-    //GET AND SETTERS
+    public Card removerCartasDaMao(int indice) {
+        return cartasNaMao.remove(indice); // Remove e retorna a carta da mão
+    }
+
+    public void mostrarCartasNaMao(List<Card> cartas) {
+        for (int i = 0; i < cartas.size(); i++) {
+            System.out.println(i + " - " + cartas.get(i).nome);
+        }
+    }
+
+    public void finalizarTurno() {
+        this.suaVez = false;
+    }
+
+    public String getNome() {
+        return nome;
+    }
 
     public int getPontosDeVida() {
-        return PontosDeVida;
+        return pontosDeVida;
     }
 
     public void setPontosDeVida(int pontosDeVida) {
-        PontosDeVida = pontosDeVida;
+        this.pontosDeVida = pontosDeVida;
     }
 
     public boolean isSuaVez() {
@@ -34,40 +58,5 @@ public class Player {
 
     public void setSuaVez(boolean suaVez) {
         this.suaVez = suaVez;
-    }
-
-    // METODOS
-    public void comprarCarta(Deck deck, Player jogador){
-        if (cartasNaMao.size() <= 5){
-            Card cartaComprada = deck.pegarUltimaCarta();
-            cartasNaMao.add(cartaComprada);
-            deck.removerCarta();
-            System.out.println("A carta comprada por "
-                    + jogador.nome + " foi: " + cartaComprada.nome);
-
-        }
-        else {
-            System.out.println("Você só pode ter 5 cartas na mão.");
-        }
-    }
-
-    public Card removerCartasDaMao(int index){
-        if (index >= 0 && index <= cartasNaMao.size()){
-            return cartasNaMao.remove(index);
-        }
-        else {
-            System.out.println("Indice inválido");
-            return null;
-        }
-    }
-
-    public void mostrarCartasNaMao(List<Card> cartas){
-       for (int i = 0; i < cartas.size(); i++){
-           System.out.println(i + " - " + cartas.get(i).nome);
-       }
-    }
-
-    public void finalizarTurno(){
-        setSuaVez(false);
     }
 }
