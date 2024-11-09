@@ -8,17 +8,10 @@ public class Battle {
         // atacante.setModo(Mode.Ataque); // Defina o modo do atacante
         // defensor.setModo(Mode.Defesa); // Defina o modo do defensor
 
-        // SE O JOGADOR DEFENSOR NÃO TIVER NENHUM MONSTRO NO CAMPO, ELE SOFRE UM ATAQUE DIRETO
-        if (campoDoDefensor.getSlotDeMonstro().isEmpty()) {
-            int dano = atacante.getAtaque();
-            jogadorDefensor.setPontosDeVida(jogadorDefensor.getPontosDeVida() - dano);
-            System.out.println("Ataque Direto de " + atacante.getNome() + " causou " + dano +
-                    " de dano ao duelista " + jogadorDefensor.getNome());
-        } else {
             // CASO O DEFENSOR ESTEJA EM MODO DE DEFESA
             if (defensor.getModo() == Mode.Defesa) {
                 if (atacante.getAtaque() > defensor.getDefesa()) {
-                    System.out.println(defensor.getNome() + " foi obliterado do campo!");
+                    System.out.println(defensor.getNome() + "não foi pareo para " + atacante.getNome() + " e foi obliterado do campo!");
                     defensor.setEstaVivo(false);
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
                 } else if (atacante.getAtaque() == defensor.getDefesa()) {
@@ -27,7 +20,7 @@ public class Battle {
                     int dano = defensor.getDefesa() - atacante.getAtaque();
                     System.out.println(atacante.getNome() + " não foi páreo para a defesa de " + defensor.getNome());
                     jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() - dano);
-                    System.out.println(jogadorAtacante.getNome() + " sofreu " + dano + " de dano.");
+                    System.out.println(jogadorAtacante.nome + " sofreu " + dano + " de dano.");
                 }
             }
             // CASO O DEFENSOR ESTEJA EM MODO DE ATAQUE
@@ -35,6 +28,8 @@ public class Battle {
                 int dano = atacante.getAtaque() - defensor.getAtaque();
                 if (dano > 0) {
                     System.out.println(defensor.getNome() + " foi obliterado do campo!");
+                    System.out.println(jogadorDefensor.nome + " Sofreu " + dano + " de dano.");
+                    jogadorDefensor.setPontosDeVida(jogadorDefensor.getPontosDeVida() - dano);
                     defensor.setEstaVivo(false);
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
                 } else if (dano == 0) {
@@ -45,10 +40,16 @@ public class Battle {
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
                 } else {
                     System.out.println(atacante.getNome() + " não foi páreo para a defesa de " + defensor.getNome());
-                    jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() - Math.abs(dano));
-                    System.out.println(jogadorAtacante.getNome() + " sofreu " + Math.abs(dano) + " de dano.");
+                    jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() + dano);
+                    System.out.println(jogadorAtacante.nome + " sofreu " + dano + " de dano.");
                 }
             }
-        }
+    }
+
+    public void ataqueDireto(MonsterCard atacante, Player jogadorDefensor){
+        int dano = atacante.getAtaque();
+        jogadorDefensor.setPontosDeVida(jogadorDefensor.getPontosDeVida() - dano);
+        System.out.println("Ataque Direto de " + atacante.getNome() + " causou " + dano +
+                " de dano ao duelista " + jogadorDefensor.nome);
     }
 }

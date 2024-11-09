@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    String nome;
+    public String nome;
     private int pontosDeVida;
     private boolean suaVez;
     List<Card> cartasNaMao;
@@ -40,9 +40,7 @@ public class Player {
         this.suaVez = false;
     }
 
-    public String getNome() {
-        return nome;
-    }
+
 
     public int getPontosDeVida() {
         return pontosDeVida;

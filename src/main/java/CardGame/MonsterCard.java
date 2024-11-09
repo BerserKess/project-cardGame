@@ -10,13 +10,12 @@ public class MonsterCard extends Card {
 
     // Construtor da classe MonsterCard
     public MonsterCard(String nome, String descricao, int ataque, int defesa, String tipo, boolean estaVivo, Element elemento) {
-        super(nome, descricao); // Chama o construtor da classe pai (Card)
+        super(nome, descricao);
         this.ataque = ataque;
         this.defesa = defesa;
         this.tipo = tipo;
         this.estaVivo = estaVivo;
         this.elemento = elemento;
-        this.modo = Mode.Ataque; // Modo padrão é Ataque
     }
 
     // Métodos getters

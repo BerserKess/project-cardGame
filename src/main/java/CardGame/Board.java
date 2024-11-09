@@ -13,7 +13,7 @@ public class Board {
     public void receberCarta(MonsterCard carta, Player jogador, int slot) {
         if (slot < slotDeMonstro.size()) {
             slotDeMonstro.set(slot, carta);
-            System.out.println(jogador.nome + " jogou " + carta.nome + " no campo.");
+            System.out.println(jogador.nome + " jogou " + carta.nome + " no campo. em modo de " + carta.getModo());
         } else {
             slotDeMonstro.add(carta); // Adiciona a carta ao campo
             System.out.println(jogador.nome + " jogou " + carta.nome + " no campo.");

@@ -25,7 +25,6 @@ public class Game {
         for (Card carta : cartasDeMonstro) {
             if (carta instanceof MonsterCard) {
                 MonsterCard monstro = (MonsterCard) carta; // Casting seguro
-                System.out.println("Monstro: " + monstro.getNome() + ", Ataque: " + monstro.getAtaque());
             } else {
                 System.out.println("Esta carta não é um monstro.");
             }
@@ -72,6 +71,7 @@ public class Game {
             while (jogador1.getPontosDeVida() > 0 && jogador2.getPontosDeVida() > 0) {
                 // Turno do Jogador 1
                 if (jogador1.isSuaVez()) {
+                    jogador1.comprarCarta(deckDuelista1, jogador1);
                     duelistaDaVez(jogador1, deckDuelista1, duelo, boardDuelista1, jogador2, boardDuelista2);
                     jogador1.finalizarTurno();
                     jogador2.setSuaVez(true);
@@ -80,6 +80,7 @@ public class Game {
                 // Turno do Jogador 2
                 if (jogador2.isSuaVez()) {
                     duelistaDaVez(jogador2, deckDuelista2, duelo, boardDuelista2, jogador1, boardDuelista1);
+                    jogador2.comprarCarta(deckDuelista2, jogador2);
                     jogador2.finalizarTurno();
                     jogador1.setSuaVez(true);
                 }
@@ -105,26 +106,40 @@ public class Game {
     public static void duelistaDaVez(Player duelista, Deck deck, Battle duelo, Board campoDoDuelista, Player oponente, Board campoDoOponente) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("O que deseja fazer " + duelista.nome + "?");
-        System.out.println("1 - Comprar carta");
-        System.out.println("2 - Jogar um monstro");
-        System.out.println("3 - Atacar");
-        System.out.println("4 - Finalizar Turno");
+        System.out.println("1 - Jogar um monstro");
+        System.out.println("2 - Atacar");
+        System.out.println("3 - Finalizar Turno");
 
         int opcao = scanner.nextInt();
         scanner.nextLine();  // Limpar o buffer
 
         switch (opcao) {
             case 1:
-                duelista.comprarCarta(deck, duelista);
-                break;
-            case 2:
                 duelista.mostrarCartasNaMao(duelista.cartasNaMao);
                 System.out.println("Escolha um índice da carta para jogar:");
                 int indiceCarta = scanner.nextInt();
                 if (indiceCarta >= 0 && indiceCarta < duelista.cartasNaMao.size()) {
                     Card cartaJogada = duelista.removerCartasDaMao(indiceCarta);
                     if (cartaJogada instanceof MonsterCard) {
-                        campoDoDuelista.receberCarta((MonsterCard) cartaJogada, duelista, 0); // Supondo que jogue no slot 0
+                        System.out.println("Deseja colocar o monstro em que modo?");
+                        System.out.println("1 - Ataque");
+                        System.out.println("2 - Defesa");
+                        int escolhaDeModo = scanner.nextInt();
+                        scanner.nextLine();
+                        switch (escolhaDeModo){
+                            case 1:
+                                ((MonsterCard) cartaJogada).setModo(Mode.Ataque);
+                                campoDoDuelista.receberCarta((MonsterCard) cartaJogada, duelista, 0);
+                                break;
+                            case  2:
+                                ((MonsterCard) cartaJogada).setModo(Mode.Defesa);
+                                campoDoDuelista.receberCarta((MonsterCard) cartaJogada, duelista, 0);
+                                break;
+                            default:
+                                System.out.println("Escolha inválida");
+                        }
+
+                        // Supondo que jogue no slot 0
                     } else {
                         System.out.println("A carta jogada não é um monstro!");
                     }
@@ -132,7 +147,7 @@ public class Game {
                     System.out.println("Índice inválido.");
                 }
                 break;
-            case 3:
+            case 2:
                 if (!campoDoDuelista.getSlotDeMonstro().isEmpty()) {
                     System.out.println("Escolha um monstro para atacar:");
                     campoDoDuelista.mostrarMonstros();
@@ -147,13 +162,13 @@ public class Game {
                         duelo.golpe(atacante, defensor, duelista, oponente, campoDoOponente, campoDoDuelista);
                     } else {
                         // Ataque direto se não houver monstros no campo do oponente
-                        duelo.golpe(atacante, null, duelista, oponente, campoDoOponente, campoDoDuelista);
+                        duelo.ataqueDireto(atacante,oponente);
                     }
                 } else {
                     System.out.println("Você não tem monstros no campo para atacar.");
                 }
                 break;
-            case 4:
+            case 3:
                 duelista.finalizarTurno();
                 break;
             default:
