@@ -3,9 +3,9 @@ package CardGame;
 public class MonsterCard extends Card {
     private int ataque;        // Atributo para o ataque do monstro
     private int defesa;        // Atributo para a defesa do monstro
-    private String tipo;       // Tipo do monstro (ex: Fogo, Água, etc.)
+    private String tipo;       // Tipo do monstro
     private boolean estaVivo;  // Indica se o monstro está vivo ou não
-    private Element elemento;   // Elemento do monstro (se houver)
+    private Element elemento;   // Elemento do monstro
     private Mode modo;         // Modo do monstro (Ataque ou Defesa)
 
     // Construtor da classe MonsterCard
@@ -18,7 +18,7 @@ public class MonsterCard extends Card {
         this.elemento = elemento;
     }
 
-    // Métodos getters
+    // GETTERS E SETTERS
     public int getAtaque() {
         return ataque;
     }
@@ -43,7 +43,6 @@ public class MonsterCard extends Card {
         return modo;
     }
 
-    // Métodos setters
     public void setEstaVivo(boolean estaVivo) {
         this.estaVivo = estaVivo;
     }

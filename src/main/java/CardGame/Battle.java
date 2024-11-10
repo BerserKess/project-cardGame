@@ -2,12 +2,23 @@ package CardGame;
 
 public class Battle {
     public void golpe(MonsterCard atacante, MonsterCard defensor, Player jogadorAtacante, Player jogadorDefensor, Board campoDoDefensor, Board campoDoAtacante) {
-        // Aqui você pode definir o modo do atacante e do defensor conforme necessário
-        // Por exemplo, você pode ter uma lógica que determina o modo com base no turno
-        // Para fins de exemplo, vamos definir o modo manualmente
-        // atacante.setModo(Mode.Ataque); // Defina o modo do atacante
-        // defensor.setModo(Mode.Defesa); // Defina o modo do defensor
+        // DEFININDO QUE O MONSTRO NÃO PODE ATACAR SE ESTIVER EM MODO DE DEFESA
+        if (atacante.getModo() == Mode.Defesa){
+            System.out.println("O monstro não pode atacar em modo de defesa!");
+            return;
+        }
 
+        // VERIFICAR CONDIÇÃO DO DEFENSOR PARA REALIZAR O ATAQUE
+        if (defensor == null){
+            if (!campoDoDefensor.todosOsSlotsVazios()){
+                System.out.println("Não pode atacar o oponente diretamente se ele tiver monstros no campo");
+            }
+            else {
+                ataqueDireto(atacante,jogadorDefensor);
+            }
+            return;
+        }
+        else {
             // CASO O DEFENSOR ESTEJA EM MODO DE DEFESA
             if (defensor.getModo() == Mode.Defesa) {
                 if (atacante.getAtaque() > defensor.getDefesa()) {
@@ -44,12 +55,17 @@ public class Battle {
                     System.out.println(jogadorAtacante.nome + " sofreu " + dano + " de dano.");
                 }
             }
+        }
+
     }
 
+    // REALIZA UM ATAQUE DIRETO AO MONSTRO
     public void ataqueDireto(MonsterCard atacante, Player jogadorDefensor){
         int dano = atacante.getAtaque();
         jogadorDefensor.setPontosDeVida(jogadorDefensor.getPontosDeVida() - dano);
         System.out.println("Ataque Direto de " + atacante.getNome() + " causou " + dano +
                 " de dano ao duelista " + jogadorDefensor.nome);
     }
+
+
 }

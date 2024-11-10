@@ -9,6 +9,7 @@ public class Player {
     private boolean suaVez;
     List<Card> cartasNaMao;
 
+    // CONSTRUTOR
     public Player(String nome, int pontosDeVida, boolean suaVez) {
         this.nome = nome;
         this.pontosDeVida = pontosDeVida;
@@ -16,12 +17,16 @@ public class Player {
         this.cartasNaMao = new ArrayList<>();
     }
 
+    // METODOS
+
     public void comprarCarta(Deck deck, Player jogador) {
-        if (!deck.cartas.isEmpty()) {
-            Card carta = deck.cartas.remove(0); // Remove a carta do deck e adiciona à mão do jogador
-            cartasNaMao.add(carta);
-            System.out.println(jogador.nome + " comprou " + carta.nome);
-        } else {
+        if (!deck.cartas.isEmpty()){
+            Card cartaComprada = deck.pegarUltimaCarta();
+            cartasNaMao.add(cartaComprada);
+            deck.removerCarta();
+            System.out.println(jogador.nome + " comprou " + cartaComprada.getNome());
+        }
+        else {
             System.out.println("O deck está vazio.");
         }
     }
@@ -40,7 +45,7 @@ public class Player {
         this.suaVez = false;
     }
 
-
+    // GETTERS E SETTERS
 
     public int getPontosDeVida() {
         return pontosDeVida;
