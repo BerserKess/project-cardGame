@@ -16,7 +16,6 @@ public class Battle {
             else {
                 ataqueDireto(atacante,jogadorDefensor);
             }
-            return;
         }
         else {
             // CASO O DEFENSOR ESTEJA EM MODO DE DEFESA
@@ -54,9 +53,11 @@ public class Battle {
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
                     campoDoDefensor.getSlotDeMonstro().add(null);
                 } else {
-                    System.out.println(atacante.getNome() + " não foi páreo para a defesa de " + defensor.getNome());
+                    System.out.println(atacante.getNome() + " não foi páreo para carta " + defensor.getNome() + " e foi  destruido!");
                     jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() + dano);
                     System.out.println(jogadorAtacante.nome + " sofreu " + dano + " de dano.");
+                    campoDoAtacante.getSlotDeMonstro().remove(atacante);
+                    campoDoAtacante.getSlotDeMonstro().add(null);
                 }
             }
         }

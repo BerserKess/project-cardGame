@@ -232,22 +232,31 @@ public class Game {
                 }
                 break;
             case 2:
-                if (!campoDoDuelista.getSlotDeMonstro().isEmpty()) {
-                    System.out.println("Escolha um monstro para atacar:");
-                    campoDoDuelista.mostrarMonstros();
-                    int indiceAtacante = scanner.nextInt();
+                // NÃO PERMITIR QUE O PLAYER DE ATACAR SEM MONSTROS NO CAMPO
+                if (campoDoDuelista.todosOsSlotsVazios()){
+                    System.out.println("Você não tem monstros no campo!");
+                    break;
+                }
+                else{
+                    if (!campoDoDuelista.getSlotDeMonstro().isEmpty()) {
+                        System.out.println("Escolha seu monstro:");
+                        campoDoDuelista.mostrarMonstros();
+                        int indiceAtacante = scanner.nextInt();
 
-                    MonsterCard atacante = campoDoDuelista.escolherMonstro(indiceAtacante);
+                        MonsterCard atacante = campoDoDuelista.escolherMonstro(indiceAtacante);
+                        if (atacante == null){
+                            System.out.println("Slot escolhido está vazio. Escolha um válido da proxima vez!");
+                            break;
+                        }
 
-                    if (!campoDoOponente.getSlotDeMonstro().isEmpty()) {
-                        System.out.println("Escolha um monstro do oponente para atacar:");
-                        campoDoOponente.mostrarMonstros();
-                        int indiceDefensor = scanner.nextInt();
-                        MonsterCard defensor = campoDoOponente.escolherMonstro(indiceDefensor);
-                        duelo.golpe(atacante, defensor, duelista, oponente, campoDoOponente, campoDoDuelista);
+                        if (!campoDoOponente.getSlotDeMonstro().isEmpty()) {
+                            System.out.println("Escolha um monstro do oponente para atacar:");
+                            campoDoOponente.mostrarMonstros();
+                            int indiceDefensor = scanner.nextInt();
+                            MonsterCard defensor = campoDoOponente.escolherMonstro(indiceDefensor);
+                            duelo.golpe(atacante, defensor, duelista, oponente, campoDoOponente, campoDoDuelista);
+                        }
                     }
-                } else {
-                    System.out.println("Você não tem monstros no campo para atacar.");
                 }
                 break;
             case 3:
