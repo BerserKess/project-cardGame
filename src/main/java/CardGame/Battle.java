@@ -25,6 +25,7 @@ public class Battle {
                     System.out.println(defensor.getNome() + "não foi pareo para " + atacante.getNome() + " e foi obliterado do campo!");
                     defensor.setEstaVivo(false);
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
+                    campoDoDefensor.getSlotDeMonstro().add(null);
                 } else if (atacante.getAtaque() == defensor.getDefesa()) {
                     System.out.println(atacante.getNome() + " não conseguiu superar a defesa de " + defensor.getNome());
                 } else {
@@ -43,12 +44,15 @@ public class Battle {
                     jogadorDefensor.setPontosDeVida(jogadorDefensor.getPontosDeVida() - dano);
                     defensor.setEstaVivo(false);
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
+                    campoDoDefensor.getSlotDeMonstro().add(null);
                 } else if (dano == 0) {
                     System.out.println(atacante.getNome() + " e " + defensor.getNome() + " se destruíram mutuamente!");
                     atacante.setEstaVivo(false);
                     defensor.setEstaVivo(false);
                     campoDoAtacante.getSlotDeMonstro().remove(atacante);
+                    campoDoAtacante.getSlotDeMonstro().add(null);
                     campoDoDefensor.getSlotDeMonstro().remove(defensor);
+                    campoDoDefensor.getSlotDeMonstro().add(null);
                 } else {
                     System.out.println(atacante.getNome() + " não foi páreo para a defesa de " + defensor.getNome());
                     jogadorAtacante.setPontosDeVida(jogadorAtacante.getPontosDeVida() + dano);
