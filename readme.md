@@ -1,6 +1,7 @@
 #  <p align="center">🃏**CardGame.java**🃏</p>
 <p align="center">
-  <strong>Projeto de Jogo de Cartas Estilo Yugioh Forbidden Memories</strong>
+  <strong>Projeto de Jogo de Cartas Estilo Yugioh Forbidden Memories.
+Realizado na disciplina de Programação Orientada a Objetos do curso de Análise e Desenvolvimento de Sistemas</strong>
 </p>
 
 ## 👥 **Grupo**
