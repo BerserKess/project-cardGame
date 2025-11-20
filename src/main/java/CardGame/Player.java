@@ -62,4 +62,8 @@ public class Player {
     public void setSuaVez(boolean suaVez) {
         this.suaVez = suaVez;
     }
+
+    public List<Card> getCartasNaMao() {
+        return cartasNaMao;
+    }
 }

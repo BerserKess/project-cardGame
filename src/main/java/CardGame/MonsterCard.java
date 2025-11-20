@@ -50,4 +50,12 @@ public class MonsterCard extends Card {
     public void setModo(Mode modo) {
         this.modo = modo;
     }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    public void setDefesa(int defesa) {
+        this.defesa = defesa;
+    }
 }

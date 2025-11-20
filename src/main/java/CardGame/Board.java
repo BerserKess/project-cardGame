@@ -26,7 +26,7 @@ public class Board {
         }
 
         if (!cartaColocada){
-            System.out.println("teste");
+            System.out.println("Não é possivel colocar outra carta, o campo está cheio!");
         }
 
 
